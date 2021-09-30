@@ -6,13 +6,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import entities.Product;
 import services.CalculationService;
 
 public class Program {
 
 	public static void main(String[] args) {
 
-		List<Integer> list = new ArrayList<>();
+		List<Product> list = new ArrayList<>();
 
 		// Isso é o caminho onde se encontra o meu arquivo txt, atualize com seu caminho
 		String path = "C:\\Users\\T420\\Desktop\\Programação\\Projeto Java\\Generics\\GenericosDelimitados\\file.txt";
@@ -21,11 +22,13 @@ public class Program {
 
 			String line = br.readLine();
 			while (line != null) {
-				list.add(Integer.parseInt(line));
+				// Convertendo para arquivo tipo CSV, separado por vírgula.
+				String[] fields = line.split(",");
+				list.add(new Product(fields[0], Double.parseDouble(fields[1])));
 				line = br.readLine();
 			}
 
-			Integer x = CalculationService.max(list);
+			Product x = CalculationService.max(list);
 			System.out.println("Max: ");
 			System.out.println(x);
 
